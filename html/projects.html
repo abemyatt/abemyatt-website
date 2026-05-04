@@ -1,0 +1,249 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.abemyatt.com/styles/styles.v1.css"
+            onerror="
+      this.onerror = null;
+      this.href = '../styles/styles.v1.css';
+    "
+    />
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="https://cdn.abemyatt.com/favicon/apple-touch-icon.png"
+            onerror="
+      this.onerror = null;
+      this.href = '../favicon_io/apple-touch-icon.png';
+    "
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="https://cdn.abemyatt.com/favicon/favicon-32x32.png"
+            onerror="
+      this.onerror = null;
+      this.href = '../favicon_io/favicon-32x32.png';
+    "
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="https://cdn.abemyatt.com/favicon/favicon-16x16.png"
+            onerror="
+      this.onerror = null;
+      this.href = '../favicon_io/favicon-16x16.png';
+    "
+    />
+    <link
+            rel="manifest"
+            href="https://cdn.abemyatt.com/favicon/site.webmanifest"
+            onerror="
+      this.onerror = null;
+      this.href = '../favicon_io/site.webmanifest';
+    "
+    />
+    <link
+            rel="shortcut icon"
+            href="https://cdn.abemyatt.com/favicon/favicon.ico"
+            onerror="
+      this.onerror = null;
+      this.href = '../favicon_io/favicon.ico';
+    "
+    />
+    <title>PROJECTS | ABE MYATT</title>
+</head>
+
+<body>
+<header>
+    <h1>Abe Myatt</h1>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./projects.html" class="active">Projects</a></li>
+            <li><a href="./music.html">Music</a></li>
+            <li><a href="./cars.html">Cars</a></li>
+            <li><a href="./philosophies.html">Philosophies</a></li>
+            <li><a href="./impulses.html">Impulses</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="content">
+        <h1>My Projects (non-public)</h1>
+        <h2>Bingscape Bot</h2>
+        <h3>The Overview</h3>
+        <p>
+            Bingscape Bot is a
+            role-management discord bot which uses Runescape and Oldschool Runescape hiscores. It is
+            the fruition of an idea a friend had, executed (non-efficiently) by myself.
+        </p>
+        <p>
+            Bingscape Bot is a Springboot application which has a cronjob for retrieving hiscores from Runescape, as
+            well
+            as a cronjob for updating any roles within guilds.
+        </p>
+        <hr/>
+        <h3>The Discovery</h3>
+        <p>
+            My friend and I started playing Oldschool Runescape, and we had an ironman group. There was a little bit of
+            friendly competition in our skill levels, and it was also just fun to see our progress.
+            He suggested we have roles in our server which are assigned to the members, and these roles should be our
+            best skill. e.g. if Mining is my best skill, I should have the Mining role. This screamed automation to me,
+            so I thought about how it would work.
+        </p>
+        <hr/>
+        <h3>The Design & Considerations</h3>
+        <p>
+            I knew the technologies I wanted to use would be SpringBoot, Java, and <a
+                href="https://github.com/discord-jda/JDA">JDA</a>. What I didn't know is that such a simple task of
+            'updating a role' could demand so much thought and consideration in the design.
+            How would I link a discord member to an account? What if the member wants to link multiple accounts? What if
+            I track RS3 and OSRS? What if the member is in multiple guilds and wants to link different accounts based on
+            the guild? When should I update the roles? When should I pull from the hiscores?
+        </p>
+        <p>
+            This all sounded relational to me. Guilds have many members, and members can be part of many guilds. A
+            member could have many runescape accounts. A runescape account could be RS3 or OSRS. So I need to consider
+            the guild, the member, the runescape account(s) and the account type.
+        </p>
+        <p>
+            There is no true way to link a runescape account to a discord account, and my design works on a basis of
+            assumed ownership. I do not check in anyway that the account belongs to a player or not, although I did
+            consider doing this. I could develop a runelite plugin, which users would need to install and verify when
+            logged in. To me, this just seemed clunky and also overkill for my use case, which was realistically just
+            one server with a few friends.
+        </p>
+        <p>
+            I also wanted to allow users to link multiple accounts to themselves. It's really not uncommon for a
+            runescape player to have multiple accounts.
+        </p>
+        <p>
+            All these considerations made the design somewhat complex though... I now needed to have a way for a player
+            to link an account, determine if the account is runescape or oldschool runescape, and then store the guild,
+            the member, the account, and account type in a persistent way. This made me consider things such as 'how
+            does
+            the bot know which account the user wants their role linked to?' or 'even though there is a crossover in
+            skills between rs3 and osrs, should I have separate or combined roles?'.
+        </p>
+        <hr/>
+        <h3>Technology Choices</h3>
+        <p>
+            As already mentioned, I chose SpringBoot and Java as the base. I chose PostgreSQL for the persistence layer,
+            as the data all
+            seemed very relational, and I knew SpringBoot JPA and hibernate could handle this easily. I also introduced
+            flyway migration, as a simple way to manage database scripts and migrations. I didn't want to be in a
+            position where live data could become corrupt, unusable, or unstable, and using flyway gave me flexibility
+            during development, and consistent migrations and rollbacks in production.
+            I also decided in terms of deployment, I would just manage this manually and have a DB instance and VPS
+            which hosted the service.
+        </p>
+        <hr/>
+        <h3>Functional Flows</h3>
+        <p>
+            So now I knew my technologies, I roughly knew how the bot should be interacted with, and I knew how to
+            schedule the hiscore retrieval and role updates.
+        </p>
+        <p>
+            The functionality is as follows:
+        </p>
+        <ol>
+            <li>
+                Bot joins guild.
+            </li>
+            <li>
+                Guild owner enables role management by using the `server-role-management` command, off by default. This
+                also creates all necessary roles that the bot uses.
+            </li>
+            <li>
+                User links runescape account using either `link-osrs` or `link-rs3` commands, showing clear separation
+                of which account type to link.
+            </li>
+            <li>
+                The listener passes this request to the account linking service.
+            </li>
+            <li>
+                The account linking service retrieves the hiscore for the account using either the rs3 hiscores or osrs.
+            </li>
+            <li>
+                The account linking service then checks if the guild already exists in the db, and creates it if not
+            </li>
+            <li>
+                Then it checks if the member already exists, and creates it if not.
+            </li>
+            <li>
+                Then it checks if the member is already linked to the guild, and links if not.
+            </li>
+            <li>
+                Finally, it creates a new linked account if it does not already exist with all the properties (Guild,
+                Member, GuildMember link).
+            </li>
+            <li>
+                Once it's created all this, it then saves the hiscores and returns to the user that their account is
+                linked.
+            </li>
+            <li>
+                User then uses the `enable-role-management` command to enable role management for themselves (member
+                level toggle).
+            </li>
+            <li>
+                With both guild role management and account role management enabled, the bot will update the players
+                role whenever the scheduled cron runs.
+            </li>
+        </ol>
+        <hr/>
+        <h3>Nice Features (IMO)</h3>
+        <p>
+            The bot has custom exceptions, and a global exception handler which maps exceptions and gives a
+            human-readable response to the user if something goes wrong. Each type of scenario is assigned a different
+            prefix, such as `BING-0000` for generic, `BING-1001` for hiscore issues, `BING-2001` for database issues,
+            etc.
+        </p>
+        <p>
+            The bot won't auto-subscribe a guild to role management, meaning servers are preserved as-is when the bot
+            joins and any 'destructive' changes are only done when enabled by someone who has the permission to do so,
+            i.e., only a member with the role management permission can enable server role management via the bot.
+        </p>
+        <p>
+            The bot can cleanup any roles if role management is disabled, meaning it won't be a manual effort to reverse
+            any of the changes the bot has made to roles.
+        </p>
+        <p>
+            Everything is easily extendable, and introducing new services, commands, exceptions, etc. is really easy to
+            do once the 'functionality' side of things is implemented.
+        </p>
+        <hr/>
+        <h3>The Issues</h3>
+        <p>I believe the database is not super-performant in its use, and indexing is not done particularly well. I
+            could also introduce more efficient queries and/or views.</p>
+        <p>
+            Logically, the flow works. However, I feel like it should fail fast in a few places, which it won't do
+            currently.
+        </p>
+        <p>
+            A production issue once deployed was the role would be assigned and unassigned if it hadn't changed between
+            scheduled jobs, due to the role service not factoring the current role. This was fixed by considering if the
+            current role and target role are equal, and then no longer processing if they are.
+        </p>
+        <hr/>
+        <h3>The Future</h3>
+        <p>
+            I would love to introduce 'leaderboards' where the bot tracks activity across acounts. Leaderboards such as
+            'most XP gained', 'most levels gained', 'most bosses killed', which could be tracked daily, weekly, monthly,
+            or yearly. This data insight makes it more motivating to play the game.
+        </p>
+        <p>
+            I would also love to work on a Runelite plugin to go with this bot, which could do some of the parts which
+            weren't originally possible (account verification). However, as I don't plan on releasing this bot as a
+            public or widely used bot, I don't think it's on the cards.
+        </p>
+    </div>
+</main>
+<footer>&copy; Abe Myatt.</footer>
+</body>

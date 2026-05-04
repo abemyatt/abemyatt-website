@@ -1,0 +1,178 @@
+:root {
+    /* https://www.color-hex.com/color-palette/1077202 -- modern warfare color palette */
+    /* --header-footer-background-color: rgba(15, 16, 11, 0.8);
+    --content-background-color: rgba(64, 70, 34, 0.8);
+    --content-text-color: rgb(194, 207, 161);
+    --horizontal-rule-color: rgba(82, 138, 99, 0.8); */
+
+    /* https://www.color-hex.com/color-palette/1077428 - heavy khaki color palette */
+    /* --header-footer-background-color: rgba(94, 106, 52, 0.8);
+    --content-background-color: rgba(126, 136, 93, 0.8);
+    --content-text-color: rgb(223, 225, 214);
+    --horizontal-rule-color: rgba(158, 166, 133, 0.8); */
+
+    /* https://www.color-hex.com/color-palette/1077005 - cyanophobia color palette */
+    --header-footer-background-color: rgba(0, 31, 51, 0.8);
+    --content-background-color: rgba(46, 70, 88, 0.8);
+    --content-text-color: rgb(198, 205, 211);
+    --horizontal-rule-color: rgba(94, 113, 127, 0.8);
+    --hyperlink-color: rgb(198, 205, 211);
+    --navbar-active-hover-color: rgb(46, 70, 88);
+
+    /* https://www.color-hex.com/color-palette/1075447 - amnesiacs color palette */
+    /* --header-footer-background-color: rgba(19, 19, 33, 0.8);
+    --content-background-color: rgba(58, 39, 76, 0.8);
+    --content-text-color: rgb(135, 160, 164);
+    --horizontal-rule-color: rgba(108, 88, 122, 0.8); */
+
+    /* https://www.color-hex.com/color-palette/1024866 - midnight purple color palette */
+    /* --header-footer-background-color: rgba(15, 14, 50, 0.8);
+    --content-background-color: rgba(22, 20, 64, 0.8);
+    --content-text-color: rgb(144, 142, 223);
+    --horizontal-rule-color: rgba(27, 25, 79, 0.8); */
+
+    /* https://www.color-hex.com/color-palette/4619 - night sky color palette */
+    /* --header-footer-background-color: rgba(19, 24, 98, 0.8);
+    --content-background-color: rgba(46, 68, 130, 0.8);
+    --content-text-color: rgb(190, 169, 222);
+    --horizontal-rule-color: rgba(84, 107, 171, 0.8); */
+}
+
+html,
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../images/my-sheep.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+header {
+    background-color: var(--header-footer-background-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+header h1 {
+    color: var(--content-text-color);
+    margin: 0;
+    padding-right: 1rem;
+    flex: 1;
+}
+
+header nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (width <= 500px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin-top: 0.5rem;
+    }
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+    white-space: nowrap;
+}
+
+nav a.active,
+nav a:hover {
+    background-color: var(--navbar-active-hover-color);
+    border-radius: 4px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--content-text-color);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.content {
+    background-color: var(--content-background-color);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+}
+
+.content hr {
+    border: none;
+    border-top: 1px solid var(--horizontal-rule-color);
+}
+
+.content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content ul li {
+    font-style: italic;
+}
+
+.content a {
+    color: var(--hyperlink-color);
+}
+
+footer {
+    background-color: var(--header-footer-background-color);
+    color: var(--content-text-color);
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.philosophies li {
+    border-bottom: 1px solid var(--horizontal-rule-color);
+}
