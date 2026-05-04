@@ -18,6 +18,7 @@
     --horizontal-rule-color: rgba(94, 113, 127, 0.8);
     --hyperlink-color: rgb(198, 205, 211);
     --navbar-active-hover-color: rgb(46, 70, 88);
+    --navbar-text-color: rgb(198, 205, 211);
 
     /* https://www.color-hex.com/color-palette/1075447 - amnesiacs color palette */
     /* --header-footer-background-color: rgba(19, 19, 33, 0.8);
@@ -111,7 +112,7 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: var(--navbar-text-color);
     text-decoration: none;
     padding: 0.5rem 1rem;
     display: block;
