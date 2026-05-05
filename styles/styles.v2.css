@@ -19,6 +19,9 @@
     --hyperlink-color: rgb(198, 205, 211);
     --navbar-active-hover-color: rgb(46, 70, 88);
     --navbar-text-color: rgb(198, 205, 211);
+    --button-color: rgba(46, 70, 88, 0.8);
+    --button-hover-color: rgba(94, 113, 127, 0.8);
+    --button-text-color: rgb(198, 205, 211);
 
     /* https://www.color-hex.com/color-palette/1075447 - amnesiacs color palette */
     /* --header-footer-background-color: rgba(19, 19, 33, 0.8);
@@ -176,4 +179,119 @@ footer {
 
 .philosophies li {
     border-bottom: 1px solid var(--horizontal-rule-color);
+}
+
+.game-button {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.game-button:hover {
+    background-color: var(--button-hover-color);
+}
+
+#stats-panel {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 220px;
+    background-color: var(--content-background-color);
+    color: var(--content-text-color);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
+
+#stats-panel h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#stats-breakdown {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+#stats-breakdown div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#stats-panel button {
+    width: 100%;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+}
+
+#result-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.image-frame {
+    width: 75%;
+    height: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-pop {
+    transform: scale(1.1);
+}
+
+#audio-controls {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    width: 220px;
+
+    background-color: var(--content-background-color);
+    color: var(--content-text-color);
+
+    padding: 1rem;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
+    z-index: 1000;
+
+    backdrop-filter: blur(6px);
+
+    font-size: 0.85rem;
+}
+
+#audio-controls h4 {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+}
+
+#audio-controls label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+#audio-controls button {
+    width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
+#audio-controls input[type="range"] {
+    width: 100%;
 }
