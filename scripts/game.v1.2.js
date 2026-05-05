@@ -18,6 +18,11 @@ const items = [
     {text: "Bird", rarity: RARITY.EPIC, image: "https://cdn.abemyatt.com/game/bird.png"},
     {text: "Toilet Cistern", rarity: RARITY.LEGENDARY, image: "https://cdn.abemyatt.com/game/toilet-cistern.png"},
 ];
+const animationItems = items.filter(item => item.rarity !== RARITY.LEGENDARY);
+
+function getAnimationItem() {
+    return animationItems[Math.floor(Math.random() * animationItems.length)];
+}
 
 const totalWeight = items.reduce((sum, item) => sum + item.rarity, 0);
 
@@ -110,7 +115,7 @@ button.addEventListener("click", () => {
         if (!roll.muted && roll.volume > 0) {
             roll.play();
         }
-        const randomItem = items[Math.floor(Math.random() * items.length)];
+        const randomItem = getAnimationItem();
 
         img.src = randomItem.image;
         img.alt = randomItem.text;
