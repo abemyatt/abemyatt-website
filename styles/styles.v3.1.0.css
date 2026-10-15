@@ -193,16 +193,28 @@ footer {
 
 .cards {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-columns: auto auto auto;
+    column-gap: 1rem;
+    row-gap: 1rem;
 }
 
 .card {
     background-color: var(--button-color);
     color: var(--button-text-color);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 0.8rem;
 }
 
 .card:hover {
+    background-color: var(--button-hover-color);
+}
+.back-button {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+}
+
+.back-button:hover {
     background-color: var(--button-hover-color);
 }
