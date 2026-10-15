@@ -190,3 +190,19 @@ footer {
 .philosophies li {
     border-bottom: 1px solid var(--horizontal-rule-color);
 }
+
+.cards {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.card {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    padding: 2rem;
+    border-radius: 0.8rem;
+}
+
+.card:hover {
+    background-color: var(--button-hover-color);
+}
